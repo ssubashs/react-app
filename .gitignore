@@ -1,0 +1,9 @@
+__tests__/output
+node_modules
+dist
+.idea
+temp
+.DS_Store
+.vscode
+*.log
+package-lock.json
