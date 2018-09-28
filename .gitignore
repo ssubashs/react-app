@@ -1,5 +1,6 @@
 __tests__/output
 node_modules
+node_modules/*
 dist
 .idea
 temp
