@@ -2,6 +2,8 @@ __tests__/output
 node_modules
 node_modules/*
 dist
+dist/*
+dist_temp
 .idea
 temp
 .DS_Store
