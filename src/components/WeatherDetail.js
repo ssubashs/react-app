@@ -21,18 +21,32 @@ const WeatherDetail = ({ title, weatherInfo }) => {
 
     return (
         <div>Weather detail for city {title}
-            <ul>
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Max Temperature</th>
+                        <th scope="col">Min Temperature</th>
+                    </tr>
+                </thead>
+            </table>
+            <tbody>
                 {weatherDetails}
-            </ul>
+            </tbody>
         </div>
     );
 }
 
 const WeatherInfoForDay = ({ applicableDate, maxTemp, minTemp }) => {
+    let index = 1;
     return (
-        <li>
-            {applicableDate} maximum temperate {maxTemp} min_temp {minTemp}
-        </li>
+        <tr>
+            <th scope="row">{index++}</th>
+            <td>{applicableDate}</td>
+            <td>{maxTemp}</td>
+            <td>{minTemp}</td>
+        </tr>
     );
 }
 
