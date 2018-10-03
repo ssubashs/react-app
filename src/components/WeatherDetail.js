@@ -8,7 +8,7 @@ const WeatherDetail = ({ title, weatherInfo }) => {
     }
 
     if (!weatherInfo) {
-        return <div>Loading...</div>;
+        return <div class="loader"></div>
     };
     let i = 1;
     const weatherDetails = weatherInfo.map(forDay => {
