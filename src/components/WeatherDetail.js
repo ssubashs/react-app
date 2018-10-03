@@ -4,16 +4,19 @@ import ReactDOM from 'react-dom';
 const WeatherDetail = ({ title, weatherInfo }) => {
 
     if (!title) {
-        return <div>Loading...</div>;
+        return <div>Search a city!</div>;
     }
 
-    console.log(`selected city is ${title}`);
-    console.log(weatherInfo);
     if (!weatherInfo) {
         return <div>Loading...</div>;
     };
     const weatherDetails = weatherInfo.map(forDay => {
-        return <WeatherInfoForDay applicableDate={forDay.applicable_date} maxTemp={forDay.max_temp} minTemp={forDay.min_temp}></WeatherInfoForDay>
+        return <WeatherInfoForDay
+            applicableDate={forDay.applicable_date}
+            key={forDay.applicable_date}
+            maxTemp={forDay.max_temp}
+            minTemp={forDay.min_temp}>
+        </WeatherInfoForDay>
     });
 
     return (
