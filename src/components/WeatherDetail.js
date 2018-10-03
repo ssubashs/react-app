@@ -10,8 +10,10 @@ const WeatherDetail = ({ title, weatherInfo }) => {
     if (!weatherInfo) {
         return <div>Loading...</div>;
     };
+    let i = 1;
     const weatherDetails = weatherInfo.map(forDay => {
         return <WeatherInfoForDay
+            index={i++}
             applicableDate={forDay.applicable_date}
             key={forDay.applicable_date}
             maxTemp={forDay.max_temp}
@@ -21,8 +23,8 @@ const WeatherDetail = ({ title, weatherInfo }) => {
 
     return (
         <div>Weather detail for city {title}
-            <table className="table">
-                <thead>
+            <table className="table-responsive-sm table-hover">
+                <thead className="thead-light">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Date</th>
@@ -30,22 +32,22 @@ const WeatherDetail = ({ title, weatherInfo }) => {
                         <th scope="col">Min Temperature</th>
                     </tr>
                 </thead>
+
+                <tbody>
+                    {weatherDetails}
+                </tbody>
             </table>
-            <tbody>
-                {weatherDetails}
-            </tbody>
         </div>
     );
 }
 
-const WeatherInfoForDay = ({ applicableDate, maxTemp, minTemp }) => {
-    let index = 1;
+const WeatherInfoForDay = ({ index, applicableDate, maxTemp, minTemp }) => {
     return (
         <tr>
-            <th scope="row">{index++}</th>
+            <th scope="row">{index}</th>
             <td>{applicableDate}</td>
-            <td>{maxTemp}</td>
-            <td>{minTemp}</td>
+            <td>{parseFloat(maxTemp).toFixed(2)}</td>
+            <td>{parseFloat(minTemp).toFixed(2)}</td>
         </tr>
     );
 }
