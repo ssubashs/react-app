@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Title from '../components/Title';
 import SearchBar from '../components/SearchBar';
-import LocationsFromSearch from '../components/LocationItems';
+import LocationsItems from '../components/LocationItems';
+import WeatherDetail from '../components/WeatherDetail';
 
 class APP extends React.Component {
     constructor(props) {
@@ -29,6 +30,23 @@ class APP extends React.Component {
 
     }
 
+    metaWeatherForCity(selectedCity, selectedCityTitle) {
+        this.setState({
+            selectedCity: selectedCity,
+            selectedCityTitle: selectedCityTitle
+        });
+
+        fetch(`http://localhost:3000/https://www.metaweather.com/api/location/${selectedCity}/`)
+            .then(body => body.json())
+            .then(response => {
+                console.log(response.consolidated_weather);
+                this.setState({
+                    weatherInfo: response.consolidated_weather
+                });
+            });
+
+    }
+
 
     render() {
         const locationSearch = _.debounce(term => {
@@ -38,10 +56,13 @@ class APP extends React.Component {
             console.log('state ' + this.state.locations);
             console.log(this.state);
         }, 500);
+
+
         return (
             <div><Title />
                 <SearchBar onSearchTermChange={locationSearch} />
-                <LocationsFromSearch locations={this.state.locations} />
+                <LocationsItems locations={this.state.locations} onSelect={(city, title) => this.metaWeatherForCity(city, title)} />
+                <WeatherDetail title={this.state.selectedCityTitle} weatherInfo={this.state.weatherInfo} />
             </div>
 
         );

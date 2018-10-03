@@ -1,32 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-/*
-class Locations extends React.Component {
-    constructor(props) {
-        super(props);
-        this.onInputChange = this.onInputChange.bind(this);
-    }
-
-    render(props) {
-        console.log(props);
-        return (
-            <div>
-                <h3>locations </h3>
-            </div>
-        );
-    }
-
-
-
-}
-*/
-
-const Locations = props => {
+const LocationsItems = props => {
     const cities = props.locations.slice(0, 5)
         .map(city => {
             console.log(`city is ${city.title} with id ${city.woeid}`)
-            return (<Location city={city.title} key={city.woeid} lat_long={city.latt_long} />)
+            return (<Location title={city.title} city={city.woeid} key={city.woeid} lat_long={city.lat_long} onSelect={props.onSelect} />)
         });
     return (
         <ul className="col-md-4 list-group">
@@ -35,10 +14,10 @@ const Locations = props => {
     );
 };
 
-const Location = ({ city, lat_long }) => {
+const Location = ({ city, title, lat_long, onSelect }) => {
     return (
 
-        <li>{city}</li>
+        <li onClick={() => onSelect(city, title)}>{title}</li>
 
     )
 }
@@ -50,4 +29,4 @@ onInputChange(event) {
 }
 */
 
-export default Locations;
+export default LocationsItems;
