@@ -1,10 +1,16 @@
 import React from 'react';
-const title = 'React Weather app';
 
+// @flow
 // functional component (another type class component)
 // no state for functional compoenets. 
-const Title = () => {
-    return (<div>{title}</div>);
+
+type Props = {
+    titleName: string
+}
+
+
+const Title = (props: Props) => {
+    return (<div>{props.somthingelse}</div>);
 }
 
 export default Title;

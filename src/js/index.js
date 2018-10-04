@@ -6,7 +6,8 @@ import LocationsItems from '../components/LocationItems';
 import WeatherDetail from '../components/WeatherDetail';
 import sleeper from '../js/util';
 import './../css/custom.css';
-
+import _ from "lodash";
+const APPTitle = 'Weather app';
 class APP extends React.Component {
     constructor(props) {
         super(props);
@@ -45,7 +46,7 @@ class APP extends React.Component {
 
         fetch(`http://localhost:3000/https://www.metaweather.com/api/location/${selectedCity}/`)
             .then(body => body.json())
-            .then(sleeper(2000))
+            //.then(sleeper(2000))
             .then(response => {
                 //console.log(response.consolidated_weather);
                 this.setState({
@@ -70,7 +71,7 @@ class APP extends React.Component {
 
 
         return (
-            <div className="container"><Title />
+            <div className="container"><Title titleName={654} />
                 <div className="row">
                     <SearchBar onSearchTermChange={locationSearch} />
                 </div>

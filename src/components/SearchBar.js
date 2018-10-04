@@ -1,11 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import _ from "lodash";
+import PropTypes from 'prop-types';
+
+
+// @flow
+type Props = { term: string };
+
+type State = {
+    term: string,
+};
 
 //class based components have state. 
-class SearchBar extends React.Component {
+class SearchBar extends React.Component<Props, State> {
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
         this.state = { term: '' };
         this.onInputChange = this.onInputChange.bind(this);
