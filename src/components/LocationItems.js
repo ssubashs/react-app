@@ -10,17 +10,18 @@ const LocationsItems = props => {
             return (<Location title={city.title} city={city.woeid} key={key_api} lat_long={city.lat_long} isSelected={city.woeid === selectedCity} onSelect={props.onSelect} />)
         });
     return (
-        <ul className="list-group">
+        <div className="list-group">
             {cities}
-        </ul>
+        </div>
     );
 };
 
 const Location = ({ city, title, lat_long, isSelected, onSelect }) => {
-    const listcssclass = isSelected ? 'list-group-item active' : 'list-group-item';
+    const baseCss = 'list-group-item list-group-item-action'
+    const listcssclass = isSelected ? `${baseCss} btn-info active` : baseCss;
     return (
 
-        <li className={listcssclass} onClick={() => onSelect(city, title)}>{title}</li>
+        <button type="button" className={listcssclass} onClick={() => onSelect(city, title)}>{title}</button>
 
     )
 }
