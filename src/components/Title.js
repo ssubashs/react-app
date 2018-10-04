@@ -10,7 +10,7 @@ type Props = {
 
 
 const Title = (props: Props) => {
-    return (<div>{props.somthingelse}</div>);
+    return (<div>{props.titleName}</div>);
 }
 
 export default Title;
