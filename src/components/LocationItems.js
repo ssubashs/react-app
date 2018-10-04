@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const LocationsItems = props => {
-    const cities = props.locations.slice(0, 5)
+    const selectedCity = props.selectedCity;
+    const cities = props.locations.slice(0, 10)
         .map(city => {
             // console.log(`city is ${city.title} with id ${city.woeid}`)
             const key_api = `${city.woeid}_${city.title}`;
-            return (<Location title={city.title} city={city.woeid} key={key_api} lat_long={city.lat_long} onSelect={props.onSelect} />)
+            return (<Location title={city.title} city={city.woeid} key={key_api} lat_long={city.lat_long} isSelected={city.woeid === selectedCity} onSelect={props.onSelect} />)
         });
     return (
         <ul className="list-group">
@@ -15,10 +16,11 @@ const LocationsItems = props => {
     );
 };
 
-const Location = ({ city, title, lat_long, onSelect }) => {
+const Location = ({ city, title, lat_long, isSelected, onSelect }) => {
+    const listcssclass = isSelected ? 'list-group-item active' : 'list-group-item';
     return (
 
-        <li className="list-group-item" onClick={() => onSelect(city, title)}>{title}</li>
+        <li className={listcssclass} onClick={() => onSelect(city, title)}>{title}</li>
 
     )
 }

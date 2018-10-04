@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Spinner from '../components/Loading';
 
 const WeatherDetail = ({ title, weatherInfo }) => {
 
-    if (!title) {
+    //console.log(`[${title}] weather detail rendering..`);
+    if (title == null) {
         return <div>Search a city!</div>;
     }
 
-    if (!weatherInfo) {
-        return <div class="loader"></div>
+    if (weatherInfo == null || weatherInfo.length == 0) {
+        //return <div className="loader"></div>
+        return <Spinner />
     };
+
     let i = 1;
     const weatherDetails = weatherInfo.map(forDay => {
         return <WeatherInfoForDay

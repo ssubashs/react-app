@@ -4,6 +4,8 @@ import Title from '../components/Title';
 import SearchBar from '../components/SearchBar';
 import LocationsItems from '../components/LocationItems';
 import WeatherDetail from '../components/WeatherDetail';
+import sleeper from '../js/util';
+import './../css/custom.css';
 
 class APP extends React.Component {
     constructor(props) {
@@ -36,14 +38,20 @@ class APP extends React.Component {
 
     metaWeatherForCity(selectedCity, selectedCityTitle) {
         this.setState({
-            selectedCity: selectedCity,
-            selectedCityTitle: selectedCityTitle
+            selectedCity: [],
+            selectedCityTitle: selectedCityTitle,
+            weatherInfo: []
         });
 
         fetch(`http://localhost:3000/https://www.metaweather.com/api/location/${selectedCity}/`)
             .then(body => body.json())
+            .then(sleeper(2000))
             .then(response => {
                 //console.log(response.consolidated_weather);
+                this.setState({
+                    selectedCity: selectedCity,
+                    selectedCityTitle: selectedCityTitle
+                });
                 this.setState({
                     weatherInfo: response.consolidated_weather
                 });
@@ -70,6 +78,7 @@ class APP extends React.Component {
                     <div className="col-3">
                         <LocationsItems
                             locations={this.state.locations}
+                            selectedCity={this.state.selectedCity}
                             onSelect={(city, title) => this.metaWeatherForCity(city, title)} />
                     </div>
                     <div className="col-8">
