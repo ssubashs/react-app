@@ -5,6 +5,7 @@ import Search from '../containers/Search';
 //import { Router, browserHistory } from 'react-router';
 //import promise from 'redux-promise';
 import CityList from '../containers/CityList';
+import WeatherInfo from '../containers/CityWeatherDetail';
 
 
 //const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
@@ -14,8 +15,17 @@ class App extends React.Component {
         return (
             <div className="container">
                 <Title titleName="React redux app" />
-                <Search />
-                <CityList />
+                <div className="row">
+                    <Search />
+                </div>
+                <div className="row">
+                    <div className="col-3">
+                        <CityList />
+                    </div>
+                    <div className="col-8">
+                        <WeatherInfo />
+                    </div>
+                </div>
             </div>
         );
     }

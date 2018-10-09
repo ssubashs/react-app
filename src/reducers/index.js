@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux';
-import Cities from './dummy_city_reducers';
+import SelectedCity from './selected_city';
+import SearchCity from './search_city';
 
 const rootReducer = combineReducers({
-    cities: Cities
+    selectedCity: SelectedCity,
+    cities: SearchCity
 });
+
 
 
 export default rootReducer;

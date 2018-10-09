@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { selectCity } from '../actions/SelectCity';
+import { bindActionCreators } from 'redux';
+
 
 class CityList extends Component {
     render() {
@@ -7,9 +10,17 @@ class CityList extends Component {
             return <div>please search a city !!!</div>;
         }
         const cities = this.props.cities
-            .map(city => {
+            .map((city, index) => {
+                if (index == 0) {
+                    this.props.selectCity({ cityId: city.woeid, title: city.title })
+                }
                 const key_api = `${city.woeid}_${city.title}`;
-                return (<Location title={city.title} city={city.woeid} key={key_api} />)
+                return (<Location
+                    title={city.title}
+                    city={city.woeid}
+                    key={key_api}
+                    props={this.props}
+                />)
             });
         return (
             <div className="list-group">
@@ -21,17 +32,26 @@ class CityList extends Component {
 
 
 
-const Location = ({ city, title }) => {
+const Location = ({ city, title, props }) => {
     const baseCss = 'list-group-item list-group-item-action';
     return (
-        <button type="button" className={baseCss}>{title}</button>
+        <button
+            type="button"
+            className={baseCss}
+            onClick={() => props.selectCity(
+                { cityId: city, title: title })}>{title}</button>
     )
 }
 
 function mapStateToProps(state) {
+    console.log(state.cities)
     return {
         cities: state.cities
     };
 }
 
-export default connect(mapStateToProps)(CityList);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ selectCity: selectCity }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CityList);
